@@ -16,7 +16,9 @@ Rails.application.routes.draw do
   end
 
   namespace :customer do
-    resources :products, only: [:index, :show]
+    resources :tenants, only: [:index, :show] do
+      resources :products, only: [:index, :show]
+    end
     resources :orders, only: [:index, :show, :create]
   end
 

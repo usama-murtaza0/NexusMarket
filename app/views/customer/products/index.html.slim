@@ -1,5 +1,7 @@
 .container
-  h1 Products
+  .d-flex.align-items-center.justify-content-between.mb-4
+    h1 = "#{tenant.name} Products"
+    = link_to "Back to Shops", customer_tenants_path, class: "btn btn-outline-secondary"
   .row
     - if products.present?
       - products.each do |product|

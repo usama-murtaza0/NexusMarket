@@ -1,0 +1,10 @@
+.container
+  h1.mb-4 Browse Shops
+  .row
+    - tenants.each do |tenant|
+      .col-md-4.mb-4
+        .card.h-100
+          .card-body
+            h5.card-title = tenant.name
+            p.card-text Visit this shop to browse their products.
+            = link_to "Visit Shop", customer_tenant_products_path(tenant), class: "btn btn-primary stretched-link"

@@ -27,4 +27,16 @@ class ApplicationController < ActionController::Base
   def require_customer
     redirect_to root_path, alert: 'Access denied' unless current_user&.customer?
   end
+
+  def after_sign_in_path_for(resource)
+    if resource.super_admin?
+      super_admin_root_path
+    elsif resource.shop_owner?
+      shop_owner_products_path
+    elsif resource.customer?
+      customer_tenants_path
+    else
+      root_path
+    end
+  end
 end
