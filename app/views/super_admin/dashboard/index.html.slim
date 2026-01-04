@@ -1,0 +1,23 @@
+.container
+  h1 Super Admin Dashboard
+  .row.mt-4
+    .col-md-3
+      .card
+        .card-body
+          h5.card-title Total Revenue
+          h3.text-success = number_to_currency(@total_revenue)
+    .col-md-3
+      .card
+        .card-body
+          h5.card-title Platform Fees
+          h3.text-primary = number_to_currency(@total_platform_fees)
+    .col-md-3
+      .card
+        .card-body
+          h5.card-title Total Orders
+          h3.text-info = @total_orders
+    .col-md-3
+      .card
+        .card-body
+          h5.card-title Total Tenants
+          h3.text-warning = @total_tenants

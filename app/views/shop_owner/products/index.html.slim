@@ -1,0 +1,23 @@
+.container
+  h1 Products
+  = link_to "New Product", new_shop_owner_product_path, class: "btn btn-primary mb-3"
+  table.table.table-striped
+    thead
+      tr
+        th Name
+        th Price
+        th Stock
+        th Actions
+    tbody
+      - if products.present?
+        - products.each do |product|
+          tr
+            td = product.name
+            td = number_to_currency(product.price)
+            td = product.stock_quantity
+            td
+              = link_to "Edit", edit_shop_owner_product_path(product), class: "btn btn-sm btn-outline-primary me-2"
+              = link_to "Delete", shop_owner_product_path(product), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-outline-danger"
+      - else
+        tr
+          td colspan="5" = "No products found"

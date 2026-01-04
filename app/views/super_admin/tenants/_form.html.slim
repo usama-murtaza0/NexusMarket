@@ -1,0 +1,19 @@
+= form_with model: [:super_admin, tenant], local: true do |f|
+  - if tenant.errors.any?
+    .alert.alert-danger
+      h5.alert-heading = "#{pluralize(tenant.errors.count, "error")} prohibited this tenant from being saved:"
+      ul.mb-0
+        - tenant.errors.full_messages.each do |message|
+          li = message
+
+  .mb-3
+    = f.label :name, class: "form-label"
+    = f.text_field :name, class: "form-control", required: true
+  .mb-3
+    = f.label :subdomain, class: "form-label"
+    = f.text_field :subdomain, class: "form-control", required: true, pattern: "[a-z0-9-]+", title: "Subdomain must only contain lowercase letters, numbers, and hyphens (no spaces)"
+    .form-text Only lowercase letters, numbers, and hyphens allowed.
+
+  .mt-4
+    = f.submit class: "btn btn-primary"
+    = link_to "Cancel", super_admin_tenants_path, class: "btn btn-secondary ms-2"

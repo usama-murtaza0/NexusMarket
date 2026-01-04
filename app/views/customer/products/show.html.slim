@@ -1,0 +1,19 @@
+.container
+  .row
+    .col-md-6
+      h1 = product.name
+      p
+        strong Price: 
+        = number_to_currency(product.price)
+      p
+        strong Stock Available: 
+        = product.stock_quantity
+      - if product.available?
+        = form_with url: customer_orders_path, method: :post, local: true do |f|
+          = f.hidden_field "order_items[][product_id]", value: product.id
+          .mb-3
+            = f.label "order_items[][quantity]", "Quantity", class: "form-label"
+            = f.number_field "order_items[][quantity]", value: 1, min: 1, max: product.stock_quantity, class: "form-control"
+          = f.submit "Place Order", class: "btn btn-primary"
+      - else
+        .alert.alert-warning Out of stock

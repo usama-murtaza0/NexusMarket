@@ -1,0 +1,21 @@
+.container
+  h1 My Orders
+  - if orders.any?
+    table.table.table-striped
+      thead
+        tr
+          th Order ID
+          th Date
+          th Total
+          th Status
+          th Actions
+      tbody
+        - orders.each do |order|
+          tr
+            td = order.id
+            td = order.created_at.strftime("%Y-%m-%d")
+            td = number_to_currency(order.total_amount)
+            td = order.status
+            td = link_to "View", customer_order_path(order), class: "btn btn-sm btn-primary"
+  - else
+    p No orders yet.

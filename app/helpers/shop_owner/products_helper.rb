@@ -1,0 +1,2 @@
+module ShopOwner::ProductsHelper
+end

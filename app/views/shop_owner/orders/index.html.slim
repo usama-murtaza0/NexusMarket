@@ -1,0 +1,23 @@
+.container
+  h1 Orders
+  - if orders.present?
+    table.table.table-striped
+      thead
+        tr
+          th Order ID
+          th Customer
+          th Date
+          th Total
+          th Status
+          th Actions
+      tbody
+        - orders.each do |order|
+          tr
+            td = order.id
+            td = order.user.email
+            td = order.created_at.strftime("%Y-%m-%d")
+            td = number_to_currency(order.total_amount)
+            td = order.status
+            td = link_to "View", shop_owner_order_path(order), class: "btn btn-sm btn-primary"
+  - else
+    p No orders yet.

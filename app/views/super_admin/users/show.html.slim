@@ -1,0 +1,25 @@
+.container
+  h1 User Details
+  .card
+    .card-body
+      h5.card-title = user.email
+      p
+        strong Role: 
+        span.badge class="bg-#{user.super_admin? ? 'danger' : user.shop_owner? ? 'primary' : 'info'}"
+          = user.role.humanize
+      p
+        strong Tenant: 
+        = user.tenant ? user.tenant.name : 'None (Super Admin)'
+      p
+        strong Created: 
+        = user.created_at.strftime("%Y-%m-%d %H:%M:%S")
+      p
+        strong Last Updated: 
+        = user.updated_at.strftime("%Y-%m-%d %H:%M:%S")
+      - if user.shop_owner? || user.customer?
+        p
+          strong Orders: 
+          = user.orders.count
+      .mt-3
+        = link_to "Edit", edit_super_admin_user_path(user), class: "btn btn-primary me-2"
+        = link_to "Back to Users", super_admin_users_path, class: "btn btn-secondary"

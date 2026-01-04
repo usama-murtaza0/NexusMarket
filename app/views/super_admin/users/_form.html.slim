@@ -1,0 +1,29 @@
+= form_with model: [:super_admin, user], local: true do |f|
+  - if user.errors.any?
+    .alert.alert-danger
+      h5 = "#{pluralize(user.errors.count, 'error')} prohibited this user from being saved:"
+      ul.mb-0
+        - user.errors.full_messages.each do |message|
+          li = message
+  
+  .mb-3
+    = f.label :email, class: "form-label"
+    = f.email_field :email, class: "form-control", required: true
+  .mb-3
+    = f.label :password, class: "form-label"
+    = f.password_field :password, class: "form-control", placeholder: user.new_record? ? "Leave blank to generate random password" : "Leave blank to keep current password"
+    small.form-text.text-muted = user.new_record? ? "Leave blank to auto-generate a random password" : "Leave blank to keep the current password"
+  .mb-3
+    = f.label :password_confirmation, "Password Confirmation", class: "form-label"
+    = f.password_field :password_confirmation, class: "form-control"
+  .mb-3
+    = f.label :role, class: "form-label"
+    = f.select :role, options_for_select([['Super Admin', 'super_admin'], ['Shop Owner', 'shop_owner'], ['Customer', 'customer']], user.role), { prompt: 'Select Role' }, { class: "form-select", required: true }
+  .mb-3
+    = f.label :tenant_id, "Tenant", class: "form-label"
+    = f.select :tenant_id, options_from_collection_for_select(@tenants, :id, :name, user.tenant_id), { prompt: 'Select Tenant (optional for super admin)' }, { class: "form-select" }
+    small.form-text.text-muted Super admins don't need a tenant. Shop owners and customers must have a tenant.
+  
+  .mt-4
+    = f.submit class: "btn btn-primary"
+    = link_to "Cancel", super_admin_users_path, class: "btn btn-secondary ms-2"

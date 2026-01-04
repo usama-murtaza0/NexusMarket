@@ -1,0 +1,36 @@
+.container
+  h1 Order Details
+  .card
+    .card-body
+      h5.card-title Order ##{order.id}
+      p
+        strong Customer: 
+        = order.user.email
+      p
+        strong Status: 
+        = order.status
+      p
+        strong Total Amount: 
+        = number_to_currency(order.total_amount)
+      p
+        strong Platform Fee: 
+        = number_to_currency(order.platform_fee.amount)
+      p
+        strong Date: 
+        = order.created_at.strftime("%Y-%m-%d %H:%M:%S")
+      
+      h6.mt-4 Order Items:
+      table.table
+        thead
+          tr
+            th Product
+            th Quantity
+            th Price
+            th Subtotal
+        tbody
+          - order.order_items.each do |item|
+            tr
+              td = item.product.name
+              td = item.quantity
+              td = number_to_currency(item.price)
+              td = number_to_currency(item.subtotal)

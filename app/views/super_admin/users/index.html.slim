@@ -1,0 +1,28 @@
+.container
+  h1 Users
+  = link_to "New User", new_super_admin_user_path, class: "btn btn-primary mb-3"
+  table.table.table-striped
+    thead
+      tr
+        th Email
+        th Role
+        th Tenant
+        th Created
+        th Actions
+    tbody
+      - if users.present?
+        - users.each do |user|
+          tr
+            td = user.email
+            td
+              span.badge class="bg-#{user.super_admin? ? 'danger' : user.shop_owner? ? 'primary' : 'info'}"
+                = user.role.humanize
+            td = user.tenant ? user.tenant.name : user.role == "super_admin" ? 'None (Super Admin)' : 'None (Customer)'
+            td = user.created_at.strftime("%Y-%m-%d")
+            td
+              = link_to "View", super_admin_user_path(user), class: "btn btn-sm btn-outline-primary me-2"
+              = link_to "Edit", edit_super_admin_user_path(user), class: "btn btn-sm btn-outline-secondary me-2"
+              = link_to "Delete", super_admin_user_path(user), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-outline-danger"
+      - else
+        tr
+          td colspan="5" No users found
