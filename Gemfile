@@ -63,6 +63,7 @@ group :test do
   # RSpec for testing
   gem "rspec-rails"
   gem "factory_bot_rails"
+  gem "shoulda-matchers"
 end
 
 # Authentication
