@@ -4,18 +4,7 @@ class SuperAdmin::TenantsController < ApplicationController
   expose :tenants, -> { Tenant.all }
   expose :tenant
 
-  def index
-  end
-
-  def show
-  end
-
-  def new
-    ActsAsTenant.current_tenant = nil
-  end
-
   def create
-    ActsAsTenant.current_tenant = nil
     tenant = Tenant.new(tenant_params)
     if tenant.save
       redirect_to super_admin_tenants_path, notice: 'Tenant created successfully'
@@ -28,7 +17,6 @@ class SuperAdmin::TenantsController < ApplicationController
   end
 
   def update
-    ActsAsTenant.current_tenant = nil
     if tenant.update(tenant_params)
       redirect_to super_admin_tenants_path, notice: 'Tenant updated successfully'
     else
@@ -37,7 +25,6 @@ class SuperAdmin::TenantsController < ApplicationController
   end
 
   def destroy
-    ActsAsTenant.current_tenant = nil
     tenant.destroy
     redirect_to super_admin_tenants_path, notice: 'Tenant deleted successfully'
   end

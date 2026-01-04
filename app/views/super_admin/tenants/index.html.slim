@@ -16,8 +16,9 @@
               td = tenant.subdomain
               td = tenant.created_at.strftime("%Y-%m-%d")
               td
-                = link_to "Edit", edit_super_admin_tenant_path(tenant), class: "btn btn-sm btn-outline-primary me-2"
-                = link_to "Delete", super_admin_tenant_path(tenant), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-outline-danger"
+                .d-flex.align-items-center.column-gap-2
+                  = link_to "Edit", edit_super_admin_tenant_path(tenant), class: "btn btn-sm btn-outline-primary"
+                  = button_to "Delete", super_admin_tenant_path(tenant), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-outline-danger"
       - else
         tr
           td colspan="4" No tenants found

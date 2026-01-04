@@ -4,9 +4,4 @@ class ShopOwner::OrdersController < ApplicationController
   expose :orders, -> { current_user.tenant.orders.order(created_at: :desc) }
   expose :order
 
-  def index
-  end
-
-  def show
-  end
 end

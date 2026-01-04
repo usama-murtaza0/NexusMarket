@@ -4,12 +4,6 @@ class Customer::OrdersController < ApplicationController
   expose :orders, -> { current_user.orders.order(created_at: :desc) }
   expose :order
 
-  def index
-  end
-
-  def show
-  end
-
   def create
     begin
       ActiveRecord::Base.transaction do

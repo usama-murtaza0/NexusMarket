@@ -4,15 +4,6 @@ class ShopOwner::ProductsController < ApplicationController
   expose :products, -> { Product.all }
   expose :product
 
-  def index
-  end
-
-  def show
-  end
-
-  def new
-  end
-
   def create
     product = Product.new(product_params)
     if product.save
@@ -22,8 +13,6 @@ class ShopOwner::ProductsController < ApplicationController
     end
   end
 
-  def edit
-  end
 
   def update
     if product.update(product_params)
